@@ -1,0 +1,5 @@
+{
+    "*.{tsx,ts}": ["pnpm run lint", "pnpm run format"],
+    "*.{html,css}": "pnpm run format",
+    "*.md": "pnpm run format"
+}
