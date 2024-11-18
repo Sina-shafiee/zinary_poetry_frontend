@@ -1,8 +1,8 @@
 /// <reference types="vite/client" />
 
 interface ImportMetaEnv {
-  readonly API_URL: string;
-  readonly APP_URL: string;
+  readonly REST_API_URL: string;
+  readonly GQL_API_URL: string;
 }
 
 interface ImportMeta {

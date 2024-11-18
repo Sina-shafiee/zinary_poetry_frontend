@@ -2,7 +2,8 @@ import * as z from 'zod';
 
 const createEnv = () => {
   const EnvSchema = z.object({
-    API_URL: z.string(),
+    REST_API_URL: z.string(),
+    GQL_API_URL: z.string(),
     APP_URL: z.string().optional().default('http://localhost:3000'),
   });
 
