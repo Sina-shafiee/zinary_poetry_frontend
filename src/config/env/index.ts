@@ -6,8 +6,6 @@ const createEnv = () => {
     APP_URL: z.string().optional().default('http://localhost:3000'),
   });
 
-  console.log(import.meta.env);
-
   const envVars = Object.entries(import.meta.env).reduce<
     Record<string, string>
   >((acc, curr) => {
@@ -17,7 +15,7 @@ const createEnv = () => {
     }
     return acc;
   }, {});
-  console.log({ envVars });
+
   const parsedEnv = EnvSchema.safeParse(envVars);
 
   if (!parsedEnv.success) {
