@@ -8,6 +8,12 @@ importers:
 
   .:
     dependencies:
+      '@tanstack/react-query':
+        specifier: 5.60.5
+        version: 5.60.5(react@18.3.1)
+      '@tanstack/react-query-devtools':
+        specifier: 5.60.5
+        version: 5.60.5(@tanstack/react-query@5.60.5(react@18.3.1))(react@18.3.1)
       axios:
         specifier: 1.7.7
         version: 1.7.7
@@ -1098,6 +1104,23 @@ packages:
     resolution: {integrity: sha512-foJM5vv+z2KQmn7emYdDLyTbkoO5bkHZE1oth2tWbQNGW7mX32d46Hz6T0MqXdWS2vBZhaEtHqdy9WYwGfiliA==}
     cpu: [x64]
     os: [win32]
+
+  '@tanstack/query-core@5.60.5':
+    resolution: {integrity: sha512-jiS1aC3XI3BJp83ZiTuDLerTmn9P3U95r6p+6/SNauLJaYxfIC4dMuWygwnBHIZxjn2zJqEpj3nysmPieoxfPQ==}
+
+  '@tanstack/query-devtools@5.59.20':
+    resolution: {integrity: sha512-vxhuQ+8VV4YWQSFxQLsuM+dnEKRY7VeRzpNabFXdhEwsBYLrjXlF1pM38A8WyKNLqZy8JjyRO8oP4Wd/oKHwuQ==}
+
+  '@tanstack/react-query-devtools@5.60.5':
+    resolution: {integrity: sha512-lzANl0ih3CNKBGUoXhhkAAHI1Y4Yqs9Jf3iuTUsGiPpmF0RWXTeYFaQxc+h1PhJz3VwYrIYCwmPoNts0mSjSuA==}
+    peerDependencies:
+      '@tanstack/react-query': ^5.60.5
+      react: ^18 || ^19
+
+  '@tanstack/react-query@5.60.5':
+    resolution: {integrity: sha512-M77bOsPwj1wYE56gk7iJvxGAr4IC12NWdIDhT+Eo8ldkWRHMvIR8I/rufIvT1OXoV/bl7EECwuRuMlxxWtvW2Q==}
+    peerDependencies:
+      react: ^18 || ^19
 
   '@types/babel__core@7.20.5':
     resolution: {integrity: sha512-qoQprZvz5wQFJwMDqeseRXWv3rqMvhgpbXFfVyWhbx9X47POIA6i/+dXefEmZKoAgOaTdaIgNSMqMIU61yRyzA==}
@@ -4210,6 +4233,21 @@ snapshots:
 
   '@rollup/rollup-win32-x64-msvc@4.27.2':
     optional: true
+
+  '@tanstack/query-core@5.60.5': {}
+
+  '@tanstack/query-devtools@5.59.20': {}
+
+  '@tanstack/react-query-devtools@5.60.5(@tanstack/react-query@5.60.5(react@18.3.1))(react@18.3.1)':
+    dependencies:
+      '@tanstack/query-devtools': 5.59.20
+      '@tanstack/react-query': 5.60.5(react@18.3.1)
+      react: 18.3.1
+
+  '@tanstack/react-query@5.60.5(react@18.3.1)':
+    dependencies:
+      '@tanstack/query-core': 5.60.5
+      react: 18.3.1
 
   '@types/babel__core@7.20.5':
     dependencies:
