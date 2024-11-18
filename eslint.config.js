@@ -35,6 +35,7 @@ export default tseslint.config(
           ignoreMiddleExtensions: true,
         },
       ],
+      '@typescript-eslint/no-explicit-any': 'off',
       'check-file/folder-naming-convention': [
         'error',
         {
