@@ -2,6 +2,8 @@ import * as React from 'react';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
+import { DirectionProvider } from '@radix-ui/react-direction';
+
 import { queryConfig } from '@/lib/react-query';
 
 import { AuthLoader } from '@/features/auth/components/auth-loader';
@@ -19,11 +21,13 @@ export const AppProvider = ({ children }: Props) => {
   return (
     <React.Suspense fallback={<p>loading...</p>}>
       <QueryClientProvider client={queryClient}>
-        <AuthLoader>
-          <Toaster />
-          {import.meta.env.DEV && <ReactQueryDevtools />}
-          {children}
-        </AuthLoader>
+        <DirectionProvider dir="rtl">
+          <AuthLoader>
+            <Toaster />
+            {import.meta.env.DEV && <ReactQueryDevtools />}
+            {children}
+          </AuthLoader>
+        </DirectionProvider>
       </QueryClientProvider>
     </React.Suspense>
   );
