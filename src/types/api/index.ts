@@ -9,3 +9,9 @@ export type AuthResponse = {
   success: boolean;
   data: User;
 };
+
+export type ApiError = {
+  success: false;
+  details: string | { [k: string]: Array<string> };
+  code_name: string;
+};
