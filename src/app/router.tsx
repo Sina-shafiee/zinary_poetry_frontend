@@ -1,6 +1,9 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import { paths } from '@/config/paths';
+import { ProtectedRoute } from '@/lib/auth';
+import { Roles } from '@/types/enum';
+import WriterDashboardLayout from '@/components/layout/writer-dashboard-layout';
 
 const createRouter = () => {
   return createBrowserRouter([
@@ -33,6 +36,28 @@ const createRouter = () => {
         };
       },
       ErrorBoundary: () => <p>Oops! somthing went wrong</p>,
+    },
+    {
+      path: paths.writer_panel.root.path,
+      element: (
+        <ProtectedRoute allowedRoles={[Roles.WRITER]}>
+          <WriterDashboardLayout />
+        </ProtectedRoute>
+      ),
+      children: [
+        {
+          path: paths.writer_panel.dashboard.path,
+          lazy: async () => {
+            const { WriterDashboard } = await import(
+              '@/app/routes/writer-panel/dashboard'
+            );
+            return {
+              Component: WriterDashboard,
+            };
+          },
+          ErrorBoundary: () => <p>Oops! somthing went wrong</p>,
+        },
+      ],
     },
   ]);
 };

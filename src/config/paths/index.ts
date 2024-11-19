@@ -20,5 +20,9 @@ export const paths = {
       path: '/panel',
       getHref: () => '/panel',
     },
+    dashboard: {
+      path: '',
+      getHref: () => '/panel',
+    },
   },
 };
