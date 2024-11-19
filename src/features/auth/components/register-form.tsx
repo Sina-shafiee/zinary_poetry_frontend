@@ -21,6 +21,7 @@ import {
 
 import { paths } from '@/config/paths';
 import { setHookFormApiErrors } from '@/lib/utils';
+import { Roles } from '@/types/enum';
 
 export const RegisterForm = () => {
   const navigate = useNavigate();
@@ -39,8 +40,14 @@ export const RegisterForm = () => {
 
   const register = useRegister({
     mutationConfig: {
-      onSuccess() {
-        navigate(`${redirectTo ? `${redirectTo}` : paths.home.getHref()}`, {
+      onSuccess(data) {
+        const redirectPath =
+          redirectTo ||
+          (data.data.roles.includes(Roles.WRITER)
+            ? paths.writer_panel.root.getHref()
+            : paths.home.getHref());
+
+        navigate(redirectPath, {
           replace: true,
         });
       },

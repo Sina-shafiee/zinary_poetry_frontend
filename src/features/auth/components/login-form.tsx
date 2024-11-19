@@ -17,6 +17,7 @@ import { Button } from '@/components/ui/button';
 import { LoginInput, loginSchema, useLogin } from '@/features/auth/api/login';
 import { paths } from '@/config/paths';
 import { setHookFormApiErrors } from '@/lib/utils';
+import { Roles } from '@/types/enum';
 
 export const LoginForm = () => {
   const navigate = useNavigate();
@@ -33,8 +34,14 @@ export const LoginForm = () => {
 
   const login = useLogin({
     mutationConfig: {
-      onSuccess() {
-        navigate(`${redirectTo ? `${redirectTo}` : paths.home.getHref()}`, {
+      onSuccess(data) {
+        const redirectPath =
+          redirectTo ||
+          (data.data.roles.includes(Roles.WRITER)
+            ? paths.writer_panel.root.getHref()
+            : paths.home.getHref());
+
+        navigate(redirectPath, {
           replace: true,
         });
       },

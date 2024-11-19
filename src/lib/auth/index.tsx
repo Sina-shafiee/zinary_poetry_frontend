@@ -1,15 +1,27 @@
-import { paths } from '@/config/paths';
+import { Navigate, useLocation } from 'react-router-dom';
+
 import { useUser } from '@/features/auth/api/get-user';
-import { Navigate } from 'react-router-dom';
 
-export const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
-  const user = useUser({});
+import { paths } from '@/config/paths';
+import { Roles } from '@/types/enum';
 
-  if (!user.data) {
-    return (
-      <Navigate to={paths.auth.login.getHref(location.pathname)} replace />
-    );
+interface Props {
+  children: React.ReactNode;
+  allowedRoles: Array<Roles>;
+}
+export const ProtectedRoute = ({ children, allowedRoles }: Props) => {
+  const { data: user } = useUser({});
+  const { pathname } = useLocation();
+
+  if (!user) {
+    return <Navigate to={paths.auth.login.getHref(pathname)} replace />;
   }
 
-  return children;
+  const hasAccess = allowedRoles.some(role => user.data.roles.includes(role));
+
+  return hasAccess ? (
+    <>{children}</>
+  ) : (
+    <Navigate to={paths.home.getHref()} replace />
+  );
 };

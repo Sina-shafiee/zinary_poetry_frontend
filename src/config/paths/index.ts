@@ -15,4 +15,10 @@ export const paths = {
         `/auth/register${redirectTo ? `?redirectTo=${encodeURIComponent(redirectTo)}` : ''}`,
     },
   },
+  writer_panel: {
+    root: {
+      path: '/panel',
+      getHref: () => '/panel',
+    },
+  },
 };
