@@ -6,6 +6,9 @@ import {
   Blocks,
   Book,
   ChevronUp,
+  List,
+  ListPlus,
+  Plus,
 } from 'lucide-react';
 
 import {
@@ -16,6 +19,8 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  SidebarMenuSub,
+  SidebarMenuSubItem,
 } from '../ui/sidebar';
 import { Separator } from '../ui/separator';
 import {
@@ -29,6 +34,11 @@ import { useUser } from '@/features/auth/api/get-user';
 
 import { paths } from '@/config/paths';
 import { useLogout } from '@/features/auth/api/logout';
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from '../ui/collapsible';
 
 const links = [
   {
@@ -40,16 +50,52 @@ const links = [
     title: 'شاعران',
     url: '#',
     icon: UserRound,
+    children: [
+      {
+        title: 'لیست شاعران',
+        url: '#',
+        icon: List,
+      },
+      {
+        title: 'افزودن شاعر ',
+        url: '#',
+        icon: ListPlus,
+      },
+    ],
   },
   {
     title: 'شعر ها',
     url: '#',
     icon: Book,
+    children: [
+      {
+        title: 'لیست شعر ها',
+        url: '#',
+        icon: List,
+      },
+      {
+        title: 'افزودن شعر ',
+        url: '#',
+        icon: ListPlus,
+      },
+    ],
   },
   {
     title: 'دسته بندی ها',
     url: '#',
     icon: Blocks,
+    children: [
+      {
+        title: 'لیست دسته بندی ها',
+        url: '#',
+        icon: List,
+      },
+      {
+        title: 'افزودن دسته بندی ',
+        url: '#',
+        icon: ListPlus,
+      },
+    ],
   },
   {
     title: 'تنظیمات',
@@ -78,16 +124,62 @@ const WriterDashboardSidebar = () => {
       <Separator className="mt-2 mx-2 w-[calc(100%-1rem)]" />
       <SidebarContent>
         <SidebarMenu className="pt-1">
-          {links.map(item => (
-            <SidebarMenuItem key={item.title}>
-              <SidebarMenuButton asChild>
-                <Link to={item.url}>
-                  <item.icon strokeWidth={1.4} />
-                  <span>{item.title}</span>
-                </Link>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-          ))}
+          {links.map((item, index) => {
+            if (item.children) {
+              return (
+                <>
+                  <Collapsible
+                    {...(index === 1 ? { defaultOpen: true } : {})}
+                    className="group/collapsible p-0"
+                  >
+                    <SidebarMenuItem>
+                      <CollapsibleTrigger asChild>
+                        <SidebarMenuButton asChild>
+                          <Link
+                            to={item.url}
+                            className="flex justify-between items-center"
+                          >
+                            <p className="flex gap-2 items-center">
+                              <item.icon
+                                className="size-4 shrink-0"
+                                strokeWidth={1.4}
+                              />
+                              <span>{item.title}</span>
+                            </p>
+                            <Plus className="size-3" />
+                          </Link>
+                        </SidebarMenuButton>
+                      </CollapsibleTrigger>
+                      <CollapsibleContent>
+                        <SidebarMenuSub>
+                          {item.children.map(child => (
+                            <SidebarMenuSubItem key={child.title}>
+                              <SidebarMenuButton asChild>
+                                <Link to={child.url}>
+                                  <child.icon strokeWidth={1.4} />
+                                  <span>{child.title}</span>
+                                </Link>
+                              </SidebarMenuButton>
+                            </SidebarMenuSubItem>
+                          ))}
+                        </SidebarMenuSub>
+                      </CollapsibleContent>
+                    </SidebarMenuItem>
+                  </Collapsible>
+                </>
+              );
+            }
+            return (
+              <SidebarMenuItem key={item.title}>
+                <SidebarMenuButton asChild>
+                  <Link to={item.url}>
+                    <item.icon strokeWidth={1.4} />
+                    <span>{item.title}</span>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            );
+          })}
         </SidebarMenu>
       </SidebarContent>
       <SidebarFooter>
