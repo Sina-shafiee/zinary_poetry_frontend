@@ -7,8 +7,16 @@ import { baseApi } from '@/lib/api/rest-api';
 import { AuthResponse } from '@/types/api';
 
 export const registerSchema = z.object({
-  email: z.string().email('Enter valid email'),
-  password: z.string(),
+  first_name: z.string().min(1, 'فیلد نام ضروری میباشد'),
+  last_name: z.string().optional(),
+  email: z
+    .string()
+    .email('ایمیل وارد شده نادرست میباشد')
+    .min(1, 'فیلد ایمیل ضروری میباشد'),
+  password: z
+    .string()
+    .min(1, 'فیلد رمز عبور ضروری میباشد')
+    .min(8, 'رمز عبور باید حداقل 8 حرف باشد'),
 });
 
 export type RegisterInput = z.infer<typeof registerSchema>;
