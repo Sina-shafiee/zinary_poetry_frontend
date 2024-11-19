@@ -21,5 +21,5 @@ export async function gqlExecute<TResult, TVariables>(
     },
   );
 
-  return response as TResult;
+  return response.data.data as TResult;
 }
