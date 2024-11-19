@@ -38,7 +38,7 @@ export const LoginForm = () => {
         const redirectPath =
           redirectTo ||
           (data.data.roles.includes(Roles.WRITER)
-            ? paths.writer_panel.root.getHref()
+            ? paths.writer_panel.dashboard.getHref()
             : paths.home.getHref());
 
         navigate(redirectPath, {
