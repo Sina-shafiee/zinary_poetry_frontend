@@ -20,5 +20,5 @@ export const AuthLoader = ({
   if (user.isError && errorFallback) {
     return errorFallback;
   }
-  return <div>{children}</div>;
+  return children;
 };
