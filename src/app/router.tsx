@@ -24,6 +24,16 @@ const createRouter = () => {
       },
       ErrorBoundary: () => <p>Oops! somthing went wrong</p>,
     },
+    {
+      path: paths.auth.register.path,
+      lazy: async () => {
+        const { RegisterPage } = await import('@/app/routes/auth/register');
+        return {
+          Component: RegisterPage,
+        };
+      },
+      ErrorBoundary: () => <p>Oops! somthing went wrong</p>,
+    },
   ]);
 };
 
