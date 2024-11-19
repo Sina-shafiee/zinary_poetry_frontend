@@ -37,8 +37,8 @@ export const useRegister = (options: UseRegisterOptions) => {
     mutationKey: ['authentication-user'],
     mutationFn: register,
     onSuccess(data, variables, context) {
-      queryClient.setQueryData(['authentication-user'], data);
       onSuccess?.(data, variables, context);
+      queryClient.setQueryData(['authentication-user'], data);
     },
     ...config,
   });

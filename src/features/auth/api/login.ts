@@ -31,9 +31,10 @@ export const useLogin = (options: UseLoginOptions) => {
   return useMutation({
     mutationKey: ['authentication-user'],
     mutationFn: login,
-    onSuccess(...args) {
-      queryClient.setQueryData(['authentication-user'], args[0]);
-      onSuccess?.(...args);
+    onSuccess(data, variables, context) {
+      onSuccess?.(data, variables, context);
+      queryClient.setQueryData(['authentication-user'], data);
+      queryClient.invalidateQueries({ queryKey: ['authentication-user'] });
     },
     ...config,
   });
