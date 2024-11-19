@@ -7,8 +7,11 @@ import { baseApi } from '@/lib/api/rest-api';
 import { AuthResponse } from '@/types/api';
 
 export const loginSchema = z.object({
-  email: z.string().email('Enter valid email'),
-  password: z.string(),
+  email: z
+    .string()
+    .email('ایمیل وارد شده نادرست میباشد')
+    .min(1, 'فیلد ایمیل ضروری میباشد'),
+  password: z.string().min(1, 'فیلد رمز عبور ضروری میباشد'),
 });
 
 export type LoginInput = z.infer<typeof loginSchema>;
