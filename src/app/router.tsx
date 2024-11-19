@@ -14,6 +14,16 @@ const createRouter = () => {
       },
       ErrorBoundary: () => <p>Oops! somthing went wrong</p>,
     },
+    {
+      path: paths.auth.login.path,
+      lazy: async () => {
+        const { LoginPage } = await import('@/app/routes/auth/login');
+        return {
+          Component: LoginPage,
+        };
+      },
+      ErrorBoundary: () => <p>Oops! somthing went wrong</p>,
+    },
   ]);
 };
 
