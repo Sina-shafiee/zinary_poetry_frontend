@@ -14,13 +14,13 @@
     --primary-foreground: 0 0% 100%;
     --secondary: 313 30% 70%;
     --secondary-foreground: 0 0% 0%;
-    --muted: 275 30% 85%;
-    --muted-foreground: 313 5% 35%;
+    --muted: 313 100% 97%;
+    --muted-foreground: 313 5% 0%;
     --accent: 275 30% 80%;
     --accent-foreground: 313 5% 10%;
     --destructive: 0 100% 30%;
     --destructive-foreground: 313 5% 90%;
-    --border: 313 30% 50%;
+    --border: 313 30% 90%;
     --input: 313 30% 18%;
     --ring: 313 60.9% 27.1%;
     --radius: 0.4rem;
