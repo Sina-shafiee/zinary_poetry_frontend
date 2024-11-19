@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { queryConfig } from '@/lib/react-query';
 
 import { AuthLoader } from '@/features/auth/components/auth-loader';
+import { Toaster } from '@/components/ui/sonner';
 
 interface Props {
   children: React.ReactNode;
@@ -19,6 +20,7 @@ export const AppProvider = ({ children }: Props) => {
     <React.Suspense fallback={<p>loading...</p>}>
       <QueryClientProvider client={queryClient}>
         <AuthLoader>
+          <Toaster />
           {import.meta.env.DEV && <ReactQueryDevtools />}
           {children}
         </AuthLoader>
