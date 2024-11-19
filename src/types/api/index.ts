@@ -1,13 +1,11 @@
 export type User = {
-  first_name: string;
-  last_name: string;
-  email: string;
   id: number;
+  email: string;
+  first_name: string;
+  last_name?: string;
 };
 
 export type AuthResponse = {
-  first_name: string;
-  last_name: string;
-  email: string;
-  id: number;
+  success: boolean;
+  data: User;
 };

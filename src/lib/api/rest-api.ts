@@ -21,7 +21,7 @@ baseApi.interceptors.request.use((config: InternalAxiosRequestConfig) => {
 
 baseApi.interceptors.response.use(
   response => {
-    return response.data;
+    return response;
   },
   error => {
     return Promise.reject(error);

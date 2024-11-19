@@ -3,9 +3,9 @@ import { queryOptions, useQuery } from '@tanstack/react-query';
 import { QueryConfig } from '@/lib/react-query';
 import { baseApi } from '@/lib/api/rest-api';
 
-import { User } from '@/types/api';
+import { AuthResponse } from '@/types/api';
 
-const getUser = async (): Promise<User> => {
+const getUser = async (): Promise<AuthResponse> => {
   const result = await baseApi.get('/auth/me/');
   return result.data;
 };
