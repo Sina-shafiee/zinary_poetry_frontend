@@ -93,7 +93,7 @@ export const LoginForm = () => {
         <p className="text-foreground text-sm text-center">
           حساب کاربری ندارید؟
           <Link
-            to={paths.home.getHref()}
+            to={paths.auth.register.getHref(redirectTo)}
             className="font-medium px-1 underline underline-offset-4"
           >
             ثبت نام کنید
