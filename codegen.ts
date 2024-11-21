@@ -8,7 +8,11 @@ const config: CodegenConfig = {
     './src/lib/gql/': {
       preset: 'client',
       config: {
+        avoidOptionals: true,
         documentMode: 'string',
+        scalars: {
+          Date: 'string',
+        },
       },
     },
     './schema.graphql': {
