@@ -3,7 +3,6 @@ import { Slot } from '@radix-ui/react-slot';
 import { VariantProps, cva } from 'class-variance-authority';
 import { PanelLeft } from 'lucide-react';
 
-import { useIsMobile } from '@/hooks/use-mobile';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -23,6 +22,8 @@ import {
   TooltipTrigger,
 } from '@/components/ui/tooltip';
 import { SidebarContext, useSidebar } from './user-sidebar';
+import { media_queries_map } from '@/config/media-queries';
+import { useMediaQuery } from '@/hooks/use-media-query';
 
 const SIDEBAR_COOKIE_NAME = 'sidebar:state';
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7;
@@ -51,7 +52,7 @@ const SidebarProvider = React.forwardRef<
     },
     ref,
   ) => {
-    const isMobile = useIsMobile();
+    const isDesktop = useMediaQuery(media_queries_map.LARGE_DESKTOP);
     const [openMobile, setOpenMobile] = React.useState(false);
 
     // This is the internal state of the sidebar.
@@ -75,8 +76,8 @@ const SidebarProvider = React.forwardRef<
 
     // Helper to toggle the sidebar.
     const toggleSidebar = React.useCallback(() => {
-      return isMobile ? setOpenMobile(open => !open) : setOpen(open => !open);
-    }, [isMobile, setOpen, setOpenMobile]);
+      return isDesktop ? setOpen(open => !open) : setOpenMobile(open => !open);
+    }, [isDesktop, setOpen, setOpenMobile]);
 
     // Adds a keyboard shortcut to toggle the sidebar.
     React.useEffect(() => {
@@ -103,7 +104,7 @@ const SidebarProvider = React.forwardRef<
         state,
         open,
         setOpen,
-        isMobile,
+        isDesktop,
         openMobile,
         setOpenMobile,
         toggleSidebar,
@@ -112,7 +113,7 @@ const SidebarProvider = React.forwardRef<
         state,
         open,
         setOpen,
-        isMobile,
+        isDesktop,
         openMobile,
         setOpenMobile,
         toggleSidebar,
@@ -165,7 +166,7 @@ const Sidebar = React.forwardRef<
     },
     ref,
   ) => {
-    const { isMobile, state, openMobile, setOpenMobile } = useSidebar();
+    const { isDesktop, state, openMobile, setOpenMobile } = useSidebar();
 
     if (collapsible === 'none') {
       return (
@@ -182,7 +183,7 @@ const Sidebar = React.forwardRef<
       );
     }
 
-    if (isMobile) {
+    if (!isDesktop) {
       return (
         <Sheet open={openMobile} onOpenChange={setOpenMobile} {...props}>
           <SheetContent
@@ -548,7 +549,7 @@ const SidebarMenuButton = React.forwardRef<
     ref,
   ) => {
     const Comp = asChild ? Slot : 'button';
-    const { isMobile, state } = useSidebar();
+    const { isDesktop, state } = useSidebar();
 
     const button = (
       <Comp
@@ -577,7 +578,7 @@ const SidebarMenuButton = React.forwardRef<
         <TooltipContent
           side="right"
           align="center"
-          hidden={state !== 'collapsed' || isMobile}
+          hidden={state !== 'collapsed' || !isDesktop}
           {...tooltip}
         />
       </Tooltip>

@@ -6,7 +6,7 @@ export type SidebarContext = {
   setOpen: (open: boolean) => void;
   openMobile: boolean;
   setOpenMobile: (open: boolean) => void;
-  isMobile: boolean;
+  isDesktop: boolean;
   toggleSidebar: () => void;
 };
 
