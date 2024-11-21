@@ -1,8 +1,8 @@
 import * as React from 'react';
+import { NuqsAdapter } from 'nuqs/adapters/react-router';
+import { DirectionProvider } from '@radix-ui/react-direction';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-
-import { DirectionProvider } from '@radix-ui/react-direction';
 
 import { queryConfig } from '@/lib/react-query';
 
@@ -23,9 +23,16 @@ export const AppProvider = ({ children }: Props) => {
       <QueryClientProvider client={queryClient}>
         <DirectionProvider dir="rtl">
           <AuthLoader>
-            <Toaster />
-            {import.meta.env.DEV && <ReactQueryDevtools />}
-            {children}
+            <NuqsAdapter>
+              <Toaster />
+              {import.meta.env.DEV && (
+                <ReactQueryDevtools
+                  buttonPosition="bottom-left"
+                  client={queryClient}
+                />
+              )}
+              {children}
+            </NuqsAdapter>
           </AuthLoader>
         </DirectionProvider>
       </QueryClientProvider>
