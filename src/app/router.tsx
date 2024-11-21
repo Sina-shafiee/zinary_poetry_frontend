@@ -1,9 +1,11 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
-import { paths } from '@/config/paths';
-import { ProtectedRoute } from '@/lib/auth';
-import { Roles } from '@/types/enum';
 import WriterDashboardLayout from '@/components/layout/writer-dashboard-layout';
+
+import { ProtectedRoute } from '@/lib/auth';
+import { paths } from '@/config/paths';
+
+import { Roles } from '@/types/enum';
 
 const createRouter = () => {
   return createBrowserRouter([
@@ -57,12 +59,23 @@ const createRouter = () => {
           },
           ErrorBoundary: () => <p>Oops! somthing went wrong</p>,
         },
+        {
+          path: paths.writer_panel.poets.path,
+          lazy: async () => {
+            const { PoetsPage } = await import(
+              '@/app/routes/writer-panel/poet/poets'
+            );
+            return {
+              Component: PoetsPage,
+            };
+          },
+          ErrorBoundary: () => <p>Oops! somthing went wrong</p>,
+        },
       ],
     },
   ]);
 };
 
 export const AppRouter = () => {
-  // TODO: pass query client for preloading data using react-router loader
   return <RouterProvider router={createRouter()} />;
 };

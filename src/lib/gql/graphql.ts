@@ -32,7 +32,7 @@ export type Scalars = {
    * value as specified by
    * [iso8601](https://en.wikipedia.org/wiki/ISO_8601).
    */
-  Date: { input: any; output: any };
+  Date: { input: string; output: string };
   /**
    * The `DateTime` scalar type represents a DateTime
    * value as specified by
@@ -54,38 +54,38 @@ export type CollectionType = {
 
 export type CreateCollection = {
   __typename?: 'CreateCollection';
-  collection?: Maybe<CollectionType>;
+  collection: Maybe<CollectionType>;
 };
 
 export type CreatePoem = {
   __typename?: 'CreatePoem';
-  poem?: Maybe<PoemType>;
+  poem: Maybe<PoemType>;
 };
 
 export type CreatePoet = {
   __typename?: 'CreatePoet';
-  poet?: Maybe<PoetType>;
+  poet: Maybe<PoetType>;
 };
 
 export type CreateVerse = {
   __typename?: 'CreateVerse';
-  verse?: Maybe<VerseType>;
+  verse: Maybe<VerseType>;
 };
 
 export type Mutation = {
   __typename?: 'Mutation';
-  createCollection?: Maybe<CreateCollection>;
-  createPoem?: Maybe<CreatePoem>;
-  createPoet?: Maybe<CreatePoet>;
-  createVerse?: Maybe<CreateVerse>;
-  updateCollection?: Maybe<UpdateCollection>;
-  updatePoem?: Maybe<UpdatePoem>;
-  updatePoet?: Maybe<UpdatePoet>;
-  updateVerse?: Maybe<UpdateVerse>;
+  createCollection: Maybe<CreateCollection>;
+  createPoem: Maybe<CreatePoem>;
+  createPoet: Maybe<CreatePoet>;
+  createVerse: Maybe<CreateVerse>;
+  updateCollection: Maybe<UpdateCollection>;
+  updatePoem: Maybe<UpdatePoem>;
+  updatePoet: Maybe<UpdatePoet>;
+  updateVerse: Maybe<UpdateVerse>;
 };
 
 export type MutationCreateCollectionArgs = {
-  description?: InputMaybe<Scalars['String']['input']>;
+  description: InputMaybe<Scalars['String']['input']>;
   title: Scalars['String']['input'];
   type: Scalars['String']['input'];
 };
@@ -94,13 +94,13 @@ export type MutationCreatePoemArgs = {
   collectionId: Scalars['Int']['input'];
   poetId: Scalars['Int']['input'];
   title: Scalars['String']['input'];
-  yearWritten?: InputMaybe<Scalars['Date']['input']>;
+  yearWritten: InputMaybe<Scalars['Date']['input']>;
 };
 
 export type MutationCreatePoetArgs = {
   biography: Scalars['String']['input'];
-  birthYear?: InputMaybe<Scalars['Date']['input']>;
-  deathYear?: InputMaybe<Scalars['Date']['input']>;
+  birthYear: InputMaybe<Scalars['Date']['input']>;
+  deathYear: InputMaybe<Scalars['Date']['input']>;
   fullName: Scalars['String']['input'];
 };
 
@@ -112,33 +112,40 @@ export type MutationCreateVerseArgs = {
 };
 
 export type MutationUpdateCollectionArgs = {
-  description?: InputMaybe<Scalars['String']['input']>;
+  description: InputMaybe<Scalars['String']['input']>;
   id: Scalars['ID']['input'];
-  title?: InputMaybe<Scalars['String']['input']>;
-  type?: InputMaybe<Scalars['String']['input']>;
+  title: InputMaybe<Scalars['String']['input']>;
+  type: InputMaybe<Scalars['String']['input']>;
 };
 
 export type MutationUpdatePoemArgs = {
-  collectionId?: InputMaybe<Scalars['Int']['input']>;
+  collectionId: InputMaybe<Scalars['Int']['input']>;
   id: Scalars['Int']['input'];
-  poetId?: InputMaybe<Scalars['Int']['input']>;
-  title?: InputMaybe<Scalars['String']['input']>;
-  yearWritten?: InputMaybe<Scalars['Date']['input']>;
+  poetId: InputMaybe<Scalars['Int']['input']>;
+  title: InputMaybe<Scalars['String']['input']>;
+  yearWritten: InputMaybe<Scalars['Date']['input']>;
 };
 
 export type MutationUpdatePoetArgs = {
-  biography?: InputMaybe<Scalars['String']['input']>;
-  birthYear?: InputMaybe<Scalars['Date']['input']>;
-  deathYear?: InputMaybe<Scalars['Date']['input']>;
-  fullName?: InputMaybe<Scalars['String']['input']>;
+  biography: InputMaybe<Scalars['String']['input']>;
+  birthYear: InputMaybe<Scalars['Date']['input']>;
+  deathYear: InputMaybe<Scalars['Date']['input']>;
+  fullName: InputMaybe<Scalars['String']['input']>;
   id: Scalars['ID']['input'];
 };
 
 export type MutationUpdateVerseArgs = {
-  firstHemistich?: InputMaybe<Scalars['String']['input']>;
+  firstHemistich: InputMaybe<Scalars['String']['input']>;
   id: Scalars['Int']['input'];
-  order?: InputMaybe<Scalars['Int']['input']>;
-  secondHemistich?: InputMaybe<Scalars['String']['input']>;
+  order: InputMaybe<Scalars['Int']['input']>;
+  secondHemistich: InputMaybe<Scalars['String']['input']>;
+};
+
+export type PaginatedPoetType = {
+  __typename?: 'PaginatedPoetType';
+  currentPage: Scalars['Int']['output'];
+  poets: Maybe<Array<Maybe<PoetType>>>;
+  totalPages: Scalars['Int']['output'];
 };
 
 export type PoemType = {
@@ -148,14 +155,14 @@ export type PoemType = {
   poet: PoetType;
   title: Scalars['String']['output'];
   verseSet: Array<VerseType>;
-  yearWritten?: Maybe<Scalars['Date']['output']>;
+  yearWritten: Maybe<Scalars['Date']['output']>;
 };
 
 export type PoetType = {
   __typename?: 'PoetType';
   biography: Scalars['String']['output'];
-  birthYear?: Maybe<Scalars['Date']['output']>;
-  deathYear?: Maybe<Scalars['Date']['output']>;
+  birthYear: Maybe<Scalars['Date']['output']>;
+  deathYear: Maybe<Scalars['Date']['output']>;
   fullName: Scalars['String']['output'];
   id: Scalars['ID']['output'];
   poemSet: Array<PoemType>;
@@ -163,14 +170,14 @@ export type PoetType = {
 
 export type Query = {
   __typename?: 'Query';
-  collection?: Maybe<CollectionType>;
-  collections?: Maybe<Array<Maybe<CollectionType>>>;
-  poem?: Maybe<PoemType>;
-  poems?: Maybe<Array<Maybe<PoemType>>>;
-  poet?: Maybe<PoetType>;
-  poets?: Maybe<Array<Maybe<PoetType>>>;
-  verse?: Maybe<VerseType>;
-  verses?: Maybe<Array<Maybe<VerseType>>>;
+  collection: Maybe<CollectionType>;
+  collections: Maybe<Array<Maybe<CollectionType>>>;
+  poem: Maybe<PoemType>;
+  poems: Maybe<Array<Maybe<PoemType>>>;
+  poet: Maybe<PoetType>;
+  poets: Maybe<PaginatedPoetType>;
+  verse: Maybe<VerseType>;
+  verses: Maybe<Array<Maybe<VerseType>>>;
 };
 
 export type QueryCollectionArgs = {
@@ -178,11 +185,18 @@ export type QueryCollectionArgs = {
 };
 
 export type QueryPoemArgs = {
-  id?: InputMaybe<Scalars['Int']['input']>;
+  id: InputMaybe<Scalars['Int']['input']>;
 };
 
 export type QueryPoetArgs = {
-  id?: InputMaybe<Scalars['Int']['input']>;
+  id: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type QueryPoetsArgs = {
+  page: InputMaybe<Scalars['Int']['input']>;
+  perPage: InputMaybe<Scalars['Int']['input']>;
+  q: InputMaybe<Scalars['String']['input']>;
+  sort: InputMaybe<Scalars['String']['input']>;
 };
 
 export type QueryVerseArgs = {
@@ -191,22 +205,22 @@ export type QueryVerseArgs = {
 
 export type UpdateCollection = {
   __typename?: 'UpdateCollection';
-  collection?: Maybe<CollectionType>;
+  collection: Maybe<CollectionType>;
 };
 
 export type UpdatePoem = {
   __typename?: 'UpdatePoem';
-  poem?: Maybe<PoemType>;
+  poem: Maybe<PoemType>;
 };
 
 export type UpdatePoet = {
   __typename?: 'UpdatePoet';
-  poet?: Maybe<PoetType>;
+  poet: Maybe<PoetType>;
 };
 
 export type UpdateVerse = {
   __typename?: 'UpdateVerse';
-  verse?: Maybe<VerseType>;
+  verse: Maybe<VerseType>;
 };
 
 export type VerseType = {
@@ -218,15 +232,27 @@ export type VerseType = {
   secondHemistich: Scalars['String']['output'];
 };
 
-export type PeomsQueryVariables = Exact<{ [key: string]: never }>;
+export type PoetsQueryVariables = Exact<{
+  page: InputMaybe<Scalars['Int']['input']>;
+  perPage: InputMaybe<Scalars['Int']['input']>;
+  q: InputMaybe<Scalars['String']['input']>;
+  sort: InputMaybe<Scalars['String']['input']>;
+}>;
 
-export type PeomsQuery = {
+export type PoetsQuery = {
   __typename?: 'Query';
-  poems?: Array<{
-    __typename?: 'PoemType';
-    id: string;
-    title: string;
-  } | null> | null;
+  poets: {
+    __typename?: 'PaginatedPoetType';
+    totalPages: number;
+    currentPage: number;
+    poets: Array<{
+      __typename?: 'PoetType';
+      id: string;
+      fullName: string;
+      birthYear: string | null;
+      deathYear: string | null;
+    } | null> | null;
+  } | null;
 };
 
 export class TypedDocumentString<TResult, TVariables>
@@ -247,11 +273,17 @@ export class TypedDocumentString<TResult, TVariables>
   }
 }
 
-export const PeomsDocument = new TypedDocumentString(`
-    query Peoms {
-  poems {
-    id
-    title
+export const PoetsDocument = new TypedDocumentString(`
+    query Poets($page: Int, $perPage: Int, $q: String, $sort: String) {
+  poets(page: $page, perPage: $perPage, q: $q, sort: $sort) {
+    totalPages
+    currentPage
+    poets {
+      id
+      fullName
+      birthYear
+      deathYear
+    }
   }
 }
-    `) as unknown as TypedDocumentString<PeomsQuery, PeomsQueryVariables>;
+    `) as unknown as TypedDocumentString<PoetsQuery, PoetsQueryVariables>;

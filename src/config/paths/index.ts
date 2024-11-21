@@ -24,5 +24,9 @@ export const paths = {
       path: '',
       getHref: () => '/panel',
     },
+    poets: {
+      path: 'poets',
+      getHref: () => '/panel/poets',
+    },
   },
 };
