@@ -141,7 +141,7 @@ export function useDataTable<TData>({
   scroll = false,
   shallow = true,
   throttleMs = 50,
-  debounceMs = 300,
+  debounceMs = 1000,
   clearOnDefault = false,
   startTransition,
   initialState,
