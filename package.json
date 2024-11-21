@@ -8,7 +8,7 @@
     "build": "tsc -b && vite build",
     "setup": "git init && husky init",
     "format": "prettier src/**/*.{ts,tsx} --write",
-    "lint": "eslint . --report-unused-disable-directives --max-warnings 0",
+    "lint": "eslint .  --max-warnings 0",
     "lint:fix": "pnpm lint --fix",
     "preview": "vite preview",
     "commitlint": "commitlint --edit",
