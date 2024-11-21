@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { Link } from 'react-router-dom';
 import {
   Settings,
@@ -29,16 +30,16 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '../ui/dropdown-menu';
-
-import { useUser } from '@/features/auth/api/get-user';
-
-import { paths } from '@/config/paths';
-import { useLogout } from '@/features/auth/api/logout';
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
 } from '../ui/collapsible';
+
+import { useUser } from '@/features/auth/api/get-user';
+import { useLogout } from '@/features/auth/api/logout';
+
+import { paths } from '@/config/paths';
 
 const links = [
   {
@@ -48,12 +49,12 @@ const links = [
   },
   {
     title: 'شاعران',
-    url: '#',
+    url: '/panel/poets',
     icon: UserRound,
     children: [
       {
         title: 'لیست شاعران',
-        url: '#',
+        url: paths.writer_panel.poets.getHref(),
         icon: List,
       },
       {
@@ -108,7 +109,12 @@ const WriterDashboardSidebar = () => {
   const logout = useLogout({});
 
   return (
-    <Sidebar collapsible="offcanvas" side="right" variant="floating">
+    <Sidebar
+      collapsible="offcanvas"
+      side="right"
+      variant="floating"
+      className="mr-[var(--removed-body-scroll-bar-size)]"
+    >
       <SidebarHeader>
         <div className="flex items-center mt-2">
           <div className="size-8 ms-2">
@@ -127,27 +133,22 @@ const WriterDashboardSidebar = () => {
           {links.map((item, index) => {
             if (item.children) {
               return (
-                <>
+                <React.Fragment key={item.title}>
                   <Collapsible
                     {...(index === 1 ? { defaultOpen: true } : {})}
                     className="group/collapsible p-0"
                   >
                     <SidebarMenuItem>
                       <CollapsibleTrigger asChild>
-                        <SidebarMenuButton asChild>
-                          <Link
-                            to={item.url}
-                            className="flex justify-between items-center"
-                          >
-                            <p className="flex gap-2 items-center">
-                              <item.icon
-                                className="size-4 shrink-0"
-                                strokeWidth={1.4}
-                              />
-                              <span>{item.title}</span>
-                            </p>
-                            <Plus className="size-3" />
-                          </Link>
+                        <SidebarMenuButton className="flex justify-between items-center">
+                          <p className="flex gap-2 items-center">
+                            <item.icon
+                              className="size-4 shrink-0"
+                              strokeWidth={1.4}
+                            />
+                            <span>{item.title}</span>
+                          </p>
+                          <Plus className="size-3" />
                         </SidebarMenuButton>
                       </CollapsibleTrigger>
                       <CollapsibleContent>
@@ -166,7 +167,7 @@ const WriterDashboardSidebar = () => {
                       </CollapsibleContent>
                     </SidebarMenuItem>
                   </Collapsible>
-                </>
+                </React.Fragment>
               );
             }
             return (
