@@ -27,8 +27,8 @@ export function DataTablePagination<TData>({
   return (
     <div className="flex w-full flex-col-reverse items-center justify-between gap-4 overflow-auto p-1 sm:flex-row sm:gap-8">
       <div className="flex-1 whitespace-nowrap text-sm text-muted-foreground">
-        {table.getFilteredSelectedRowModel().rows.length} از{' '}
-        {table.getFilteredRowModel().rows.length} سطر(ها) انتخاب شده
+        {table.getFilteredSelectedRowModel().rows.length} سطر از{' '}
+        {table.getFilteredRowModel().rows.length} سطر انتخاب شده است
       </div>
       <div className="flex flex-col-reverse items-center gap-4 sm:flex-row sm:gap-6 lg:gap-8">
         <div className="flex items-center gap-2">

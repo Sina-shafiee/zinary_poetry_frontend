@@ -8,8 +8,11 @@ const WriterDashboardLayout = () => {
   return (
     <SidebarProvider>
       <WriterDashboardSidebar />
-      <main className="w-full">
-        <SidebarTrigger className="md:hidden" />
+      <main className="w-full p-2 pb-12 md:pe-4">
+        <div className="h-20 rounded shadow bg-card flex items-center ps-4 gap-2">
+          <SidebarTrigger />
+          <p>هدر وبسایت اینجا قرار خواهد گرفت D:</p>
+        </div>
         <Outlet />
       </main>
     </SidebarProvider>
