@@ -17,6 +17,8 @@ const documents = {
     types.DeletePoetDocument,
   '\n  query Poets($page: Int, $perPage: Int, $q: String, $sort: String) {\n    poets(page: $page, perPage: $perPage, q: $q, sort: $sort) {\n      totalPages\n      currentPage\n      poets {\n        id\n        fullName\n        birthYear\n        deathYear\n      }\n    }\n  }\n':
     types.PoetsDocument,
+  '\n  mutation updatePoet(\n    $id: ID!\n    $fullName: String\n    $birthYear: Date\n    $deathYear: Date\n    $biography: String\n  ) {\n    updatePoet(\n      id: $id\n      fullName: $fullName\n      birthYear: $birthYear\n      deathYear: $deathYear\n      biography: $biography\n    ) {\n      poet {\n        id\n      }\n    }\n  }\n':
+    types.UpdatePoetDocument,
 };
 
 /**
@@ -31,6 +33,12 @@ export function graphql(
 export function graphql(
   source: '\n  query Poets($page: Int, $perPage: Int, $q: String, $sort: String) {\n    poets(page: $page, perPage: $perPage, q: $q, sort: $sort) {\n      totalPages\n      currentPage\n      poets {\n        id\n        fullName\n        birthYear\n        deathYear\n      }\n    }\n  }\n',
 ): typeof import('./graphql').PoetsDocument;
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(
+  source: '\n  mutation updatePoet(\n    $id: ID!\n    $fullName: String\n    $birthYear: Date\n    $deathYear: Date\n    $biography: String\n  ) {\n    updatePoet(\n      id: $id\n      fullName: $fullName\n      birthYear: $birthYear\n      deathYear: $deathYear\n      biography: $biography\n    ) {\n      poet {\n        id\n      }\n    }\n  }\n',
+): typeof import('./graphql').UpdatePoetDocument;
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

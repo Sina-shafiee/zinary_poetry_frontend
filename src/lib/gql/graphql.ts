@@ -274,6 +274,22 @@ export type PoetsQuery = {
   } | null;
 };
 
+export type UpdatePoetMutationVariables = Exact<{
+  id: Scalars['ID']['input'];
+  fullName: InputMaybe<Scalars['String']['input']>;
+  birthYear: InputMaybe<Scalars['Date']['input']>;
+  deathYear: InputMaybe<Scalars['Date']['input']>;
+  biography: InputMaybe<Scalars['String']['input']>;
+}>;
+
+export type UpdatePoetMutation = {
+  __typename?: 'Mutation';
+  updatePoet: {
+    __typename?: 'UpdatePoet';
+    poet: { __typename?: 'PoetType'; id: string } | null;
+  } | null;
+};
+
 export class TypedDocumentString<TResult, TVariables>
   extends String
   implements DocumentTypeDecoration<TResult, TVariables>
@@ -316,3 +332,21 @@ export const PoetsDocument = new TypedDocumentString(`
   }
 }
     `) as unknown as TypedDocumentString<PoetsQuery, PoetsQueryVariables>;
+export const UpdatePoetDocument = new TypedDocumentString(`
+    mutation updatePoet($id: ID!, $fullName: String, $birthYear: Date, $deathYear: Date, $biography: String) {
+  updatePoet(
+    id: $id
+    fullName: $fullName
+    birthYear: $birthYear
+    deathYear: $deathYear
+    biography: $biography
+  ) {
+    poet {
+      id
+    }
+  }
+}
+    `) as unknown as TypedDocumentString<
+  UpdatePoetMutation,
+  UpdatePoetMutationVariables
+>;

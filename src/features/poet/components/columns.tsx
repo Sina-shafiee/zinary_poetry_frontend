@@ -1,6 +1,10 @@
 import { Ellipsis } from 'lucide-react';
 import { ColumnDef } from '@tanstack/react-table';
 
+import { DateObject } from 'react-multi-date-picker';
+import persian_fa from 'react-date-object/locales/persian_fa';
+import persian from 'react-date-object/calendars/persian';
+
 import { DataTableColumnHeader } from '@/components/data-table/data-table-column-header';
 
 import { Button } from '@/components/ui/button';
@@ -65,7 +69,15 @@ export const poetColumn: Array<ColumnDef<NonNullablePoetType>> = [
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="تاریخ تولد" />
     ),
-    cell: ({ row }) => <div>{row.getValue('birthYear')}</div>,
+    cell: ({ row }) => (
+      <div>
+        {new DateObject({
+          locale: persian_fa,
+          calendar: persian,
+          date: new Date(row.getValue('birthYear')),
+        }).format('YYYY/MM/DD')}
+      </div>
+    ),
     enableSorting: true,
     enableHiding: true,
     meta: {
@@ -79,7 +91,16 @@ export const poetColumn: Array<ColumnDef<NonNullablePoetType>> = [
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="تاریخ وفات" />
     ),
-    cell: ({ row }) => <div>{row.getValue('deathYear')}</div>,
+    cell: ({ row }) => (
+      <div>
+        {' '}
+        {new DateObject({
+          locale: persian_fa,
+          calendar: persian,
+          date: new Date(row.getValue('deathYear')),
+        }).format('YYYY/MM/DD')}
+      </div>
+    ),
     enableSorting: true,
     enableHiding: true,
     meta: {
@@ -96,7 +117,16 @@ export const poetColumn: Array<ColumnDef<NonNullablePoetType>> = [
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="تاریخ فلان" />
     ),
-    cell: ({ row }) => <div>{row.getValue('year')}</div>,
+    cell: ({ row }) => (
+      <div>
+        {' '}
+        {new DateObject({
+          locale: persian_fa,
+          calendar: persian,
+          date: new Date(row.getValue('birthYear')),
+        }).format('YYYY/MM/DD')}
+      </div>
+    ),
     enableSorting: true,
     enableHiding: true,
     meta: {

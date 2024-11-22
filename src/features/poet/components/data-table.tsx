@@ -9,6 +9,7 @@ import { usePoetsTableAction } from '@/features/poet/store/table-action';
 
 import { DataTableFilterField } from '@/types';
 import { PoetDeleteDialog } from './delete-dialog';
+import { PoetUpdateSheet } from './update-sheet';
 
 interface Props<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -62,7 +63,12 @@ export function PoetDataTable<TData, TColumn>({
           <DataTableToolbar table={table} filterFields={filterFields} />
         </DataTable>
       )}
-      {tableActionState?.type === 'update' && <p>update</p>}
+
+      <PoetUpdateSheet
+        open={tableActionState?.type === 'update'}
+        onOpenChange={() => clearTableAction()}
+        poet={tableActionState?.row.original ?? null}
+      />
       <PoetDeleteDialog
         open={tableActionState?.type === 'delete'}
         onOpenChange={() => clearTableAction()}
