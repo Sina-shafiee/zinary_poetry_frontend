@@ -106,7 +106,7 @@ export const PoetDeleteDialog = ({
           <Button
             aria-label="حذف سطر های انتخاب شده"
             variant="destructive"
-            className="w-16"
+            className="min-w-16"
             onClick={onDelete}
             disabled={deletePoet.isPending}
           >
