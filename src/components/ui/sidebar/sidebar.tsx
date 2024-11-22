@@ -52,7 +52,7 @@ const SidebarProvider = React.forwardRef<
     },
     ref,
   ) => {
-    const isDesktop = useMediaQuery(media_queries_map.LARGE_DESKTOP);
+    const isMobile = useMediaQuery(media_queries_map.Mobile);
     const [openMobile, setOpenMobile] = React.useState(false);
 
     // This is the internal state of the sidebar.
@@ -76,8 +76,8 @@ const SidebarProvider = React.forwardRef<
 
     // Helper to toggle the sidebar.
     const toggleSidebar = React.useCallback(() => {
-      return isDesktop ? setOpen(open => !open) : setOpenMobile(open => !open);
-    }, [isDesktop, setOpen, setOpenMobile]);
+      return isMobile ? setOpenMobile(open => !open) : setOpen(open => !open);
+    }, [isMobile, setOpen, setOpenMobile]);
 
     // Adds a keyboard shortcut to toggle the sidebar.
     React.useEffect(() => {
@@ -104,7 +104,7 @@ const SidebarProvider = React.forwardRef<
         state,
         open,
         setOpen,
-        isDesktop,
+        isMobile,
         openMobile,
         setOpenMobile,
         toggleSidebar,
@@ -113,7 +113,7 @@ const SidebarProvider = React.forwardRef<
         state,
         open,
         setOpen,
-        isDesktop,
+        isMobile,
         openMobile,
         setOpenMobile,
         toggleSidebar,
@@ -167,7 +167,7 @@ const Sidebar = React.forwardRef<
     },
     ref,
   ) => {
-    const { isDesktop, state, openMobile, setOpenMobile } = useSidebar();
+    const { isMobile, state, openMobile, setOpenMobile } = useSidebar();
 
     if (collapsible === 'none') {
       return (
@@ -184,7 +184,7 @@ const Sidebar = React.forwardRef<
       );
     }
 
-    if (!isDesktop) {
+    if (isMobile) {
       return (
         <Sheet open={openMobile} onOpenChange={setOpenMobile} {...props}>
           <SheetContent
@@ -550,7 +550,7 @@ const SidebarMenuButton = React.forwardRef<
     ref,
   ) => {
     const Comp = asChild ? Slot : 'button';
-    const { isDesktop, state } = useSidebar();
+    const { isMobile, state } = useSidebar();
 
     const button = (
       <Comp
@@ -579,7 +579,7 @@ const SidebarMenuButton = React.forwardRef<
         <TooltipContent
           side="right"
           align="center"
-          hidden={state !== 'collapsed' || !isDesktop}
+          hidden={state !== 'collapsed' || !isMobile}
           {...tooltip}
         />
       </Tooltip>
