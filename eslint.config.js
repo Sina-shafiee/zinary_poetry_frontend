@@ -6,7 +6,7 @@ import tseslint from 'typescript-eslint';
 import checkFile from 'eslint-plugin-check-file';
 
 export default tseslint.config(
-  { ignores: ['dist', 'src/lib/gql/'] },
+  { ignores: ['dist'] },
   {
     extends: [js.configs.recommended, ...tseslint.configs.recommended],
     files: ['**/*.{ts,tsx}'],
