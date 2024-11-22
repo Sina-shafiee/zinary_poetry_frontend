@@ -1,9 +1,14 @@
-import { DataTable } from '@/components/data-table/data-table';
 import { ColumnDef } from '@tanstack/react-table';
-import { useDataTable } from '@/hooks/use-data-table';
+
+import { DataTable } from '@/components/data-table/data-table';
 import { DataTableToolbar } from '@/components/data-table/data-table-toolbar';
-import { DataTableFilterField } from '@/types';
 import { DataTableSkeleton } from '@/components/data-table/data-table-skeleton';
+
+import { useDataTable } from '@/hooks/use-data-table';
+import { usePoetsTableAction } from '@/features/poet/store/table-action';
+
+import { DataTableFilterField } from '@/types';
+import { PoetDeleteDialog } from './delete-dialog';
 
 interface Props<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -17,6 +22,9 @@ export function PoetDataTable<TData, TColumn>({
   isLoading,
   totalPages,
 }: Props<TData, TColumn>) {
+  const tableActionState = usePoetsTableAction(state => state.state);
+  const clearTableAction = usePoetsTableAction(state => state.clearAction);
+
   const filterFields: DataTableFilterField<TData>[] = [
     {
       id: 'query' as Extract<keyof TData, string>,
@@ -54,6 +62,16 @@ export function PoetDataTable<TData, TColumn>({
           <DataTableToolbar table={table} filterFields={filterFields} />
         </DataTable>
       )}
+      {tableActionState?.type === 'update' && <p>update</p>}
+      <PoetDeleteDialog
+        open={tableActionState?.type === 'delete'}
+        onOpenChange={() => clearTableAction()}
+        poets={
+          tableActionState?.row.original ? [tableActionState?.row.original] : []
+        }
+        showTrigger={false}
+        onSuccess={() => tableActionState?.row.toggleSelected(false)}
+      />
     </section>
   );
 }

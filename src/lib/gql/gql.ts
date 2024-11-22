@@ -13,10 +13,18 @@ import * as types from './graphql';
  * Learn more about it here: https://the-guild.dev/graphql/codegen/plugins/presets/preset-client#reducing-bundle-size
  */
 const documents = {
+  '\n  mutation deletePoet($id: ID!) {\n    deletePoet(id: $id) {\n      success\n    }\n  }\n':
+    types.DeletePoetDocument,
   '\n  query Poets($page: Int, $perPage: Int, $q: String, $sort: String) {\n    poets(page: $page, perPage: $perPage, q: $q, sort: $sort) {\n      totalPages\n      currentPage\n      poets {\n        id\n        fullName\n        birthYear\n        deathYear\n      }\n    }\n  }\n':
     types.PoetsDocument,
 };
 
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(
+  source: '\n  mutation deletePoet($id: ID!) {\n    deletePoet(id: $id) {\n      success\n    }\n  }\n',
+): typeof import('./graphql').DeletePoetDocument;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

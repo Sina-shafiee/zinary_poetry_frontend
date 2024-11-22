@@ -72,12 +72,18 @@ export type CreateVerse = {
   verse: Maybe<VerseType>;
 };
 
+export type DeletePoet = {
+  __typename?: 'DeletePoet';
+  success: Maybe<Scalars['Boolean']['output']>;
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   createCollection: Maybe<CreateCollection>;
   createPoem: Maybe<CreatePoem>;
   createPoet: Maybe<CreatePoet>;
   createVerse: Maybe<CreateVerse>;
+  deletePoet: Maybe<DeletePoet>;
   updateCollection: Maybe<UpdateCollection>;
   updatePoem: Maybe<UpdatePoem>;
   updatePoet: Maybe<UpdatePoet>;
@@ -109,6 +115,10 @@ export type MutationCreateVerseArgs = {
   order: Scalars['Int']['input'];
   poemId: Scalars['Int']['input'];
   secondHemistich: Scalars['String']['input'];
+};
+
+export type MutationDeletePoetArgs = {
+  id: Scalars['ID']['input'];
 };
 
 export type MutationUpdateCollectionArgs = {
@@ -232,6 +242,15 @@ export type VerseType = {
   secondHemistich: Scalars['String']['output'];
 };
 
+export type DeletePoetMutationVariables = Exact<{
+  id: Scalars['ID']['input'];
+}>;
+
+export type DeletePoetMutation = {
+  __typename?: 'Mutation';
+  deletePoet: { __typename?: 'DeletePoet'; success: boolean | null } | null;
+};
+
 export type PoetsQueryVariables = Exact<{
   page: InputMaybe<Scalars['Int']['input']>;
   perPage: InputMaybe<Scalars['Int']['input']>;
@@ -273,6 +292,16 @@ export class TypedDocumentString<TResult, TVariables>
   }
 }
 
+export const DeletePoetDocument = new TypedDocumentString(`
+    mutation deletePoet($id: ID!) {
+  deletePoet(id: $id) {
+    success
+  }
+}
+    `) as unknown as TypedDocumentString<
+  DeletePoetMutation,
+  DeletePoetMutationVariables
+>;
 export const PoetsDocument = new TypedDocumentString(`
     query Poets($page: Int, $perPage: Int, $q: String, $sort: String) {
   poets(page: $page, perPage: $perPage, q: $q, sort: $sort) {
