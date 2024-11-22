@@ -1,20 +1,15 @@
-import { useSearchParams } from 'react-router-dom';
-
 import { PoetDataTable } from '@/features/poet/components/data-table';
 import { poetColumn } from '@/features/poet/components/columns';
 
 import { usePoets } from '@/features/poet/api/get-poets';
 
+import { usePoetTableSearchParams } from '@/features/poet/hooks/use-poet-table-search-params';
+
 export const PoetsPage = () => {
-  const [searchParams] = useSearchParams();
+  const params = usePoetTableSearchParams();
 
   const { data, isLoading } = usePoets({
-    variables: {
-      page: Number(searchParams.get('page')),
-      perPage: Number(searchParams.get('perPage')),
-      sort: searchParams.get('sort'),
-      searchQuery: searchParams.get('query'),
-    },
+    variables: params,
     queryConfig: {
       throwOnError: true,
     },

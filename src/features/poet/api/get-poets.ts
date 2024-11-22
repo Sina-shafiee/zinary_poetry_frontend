@@ -55,8 +55,8 @@ type UsePoetsOptions = {
   variables: {
     page?: number;
     perPage?: number;
-    sort: string | null;
-    searchQuery: string | null;
+    sort?: string;
+    searchQuery?: string;
   };
   queryConfig?: QueryConfig<typeof getPoetsQueryOptions>;
 };
