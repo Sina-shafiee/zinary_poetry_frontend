@@ -14,6 +14,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 
 import { NonNullablePoetType } from '@/features/poet/api/get-poets';
+import { usePoetsTableAction } from '../store/table-action';
 
 export const poetColumn: Array<ColumnDef<NonNullablePoetType>> = [
   {
@@ -105,7 +106,8 @@ export const poetColumn: Array<ColumnDef<NonNullablePoetType>> = [
 
   {
     id: 'actions',
-    cell: function Cell() {
+    cell: function Cell({ row }) {
+      const updateAction = usePoetsTableAction(state => state.updateAction);
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -118,10 +120,18 @@ export const poetColumn: Array<ColumnDef<NonNullablePoetType>> = [
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end" className="w-40">
-            <DropdownMenuItem>ویرایش</DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={() => updateAction({ row, type: 'update' })}
+            >
+              ویرایش
+            </DropdownMenuItem>
 
             <DropdownMenuSeparator />
-            <DropdownMenuItem>حذف</DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={() => updateAction({ row, type: 'delete' })}
+            >
+              حذف
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       );
