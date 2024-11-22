@@ -81,3 +81,7 @@
     @apply bg-background text-foreground;
   }
 }
+/* i hate this date picker */
+.rmdp-wrapper {
+  @apply !shadow-md;
+}
