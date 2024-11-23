@@ -20,7 +20,7 @@ const MainContent = () => {
   );
 };
 
-const WriterDashboardLayout = () => {
+export const WriterDashboardLayout = () => {
   return (
     <SidebarProvider>
       <WriterDashboardSidebar />
@@ -28,5 +28,3 @@ const WriterDashboardLayout = () => {
     </SidebarProvider>
   );
 };
-
-export default WriterDashboardLayout;
