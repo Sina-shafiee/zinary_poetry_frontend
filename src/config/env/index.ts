@@ -5,6 +5,7 @@ const createEnv = () => {
     REST_API_URL: z.string(),
     GQL_API_URL: z.string(),
     APP_URL: z.string().optional().default('http://localhost:3000'),
+    BACKEND_URL: z.string(),
   });
 
   const envVars = Object.entries(import.meta.env).reduce<
