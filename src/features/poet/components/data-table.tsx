@@ -9,7 +9,6 @@ import { usePoetsTableAction } from '@/features/poet/store/table-action';
 
 import { DataTableFilterField } from '@/types';
 import { PoetDeleteDialog } from './delete-dialog';
-import { PoetUpdateSheet } from './update-sheet';
 
 interface Props<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -49,9 +48,6 @@ export function PoetDataTable<TData, TColumn>({
 
   return (
     <section className="flex flex-col gap-4">
-      <div className="rounded shadow bg-card flex items-center p-4 gap-2">
-        <h2>لیست شاعران</h2>
-      </div>
       {isLoading ? (
         <DataTableSkeleton
           columnCount={columns.length - 1}
@@ -64,11 +60,6 @@ export function PoetDataTable<TData, TColumn>({
         </DataTable>
       )}
 
-      <PoetUpdateSheet
-        open={tableActionState?.type === 'update'}
-        onOpenChange={() => clearTableAction()}
-        poet={tableActionState?.row.original ?? null}
-      />
       <PoetDeleteDialog
         open={tableActionState?.type === 'delete'}
         onOpenChange={() => clearTableAction()}

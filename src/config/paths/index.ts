@@ -28,5 +28,9 @@ export const paths = {
       path: 'poets',
       getHref: () => '/panel/poets',
     },
+    update_poet: {
+      path: 'poets/:poetId/edit',
+      getHref: (id: string) => `/panel/poets/${id}/edit`,
+    },
   },
 };

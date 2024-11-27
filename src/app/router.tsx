@@ -70,10 +70,22 @@ const createRouter = () => {
           path: paths.writer_panel.poets.path,
           lazy: async () => {
             const { PoetsPage } = await import(
-              '@/app/routes/writer-panel/poet/poets'
+              '@/app/routes/writer-panel/poets/poets'
             );
             return {
               Component: PoetsPage,
+            };
+          },
+          ErrorBoundary: () => <p>Oops! somthing went wrong</p>,
+        },
+        {
+          path: paths.writer_panel.update_poet.path,
+          lazy: async () => {
+            const { UpdatePoetPage } = await import(
+              '@/app/routes/writer-panel/poets/update-poet'
+            );
+            return {
+              Component: UpdatePoetPage,
             };
           },
           ErrorBoundary: () => <p>Oops! somthing went wrong</p>,

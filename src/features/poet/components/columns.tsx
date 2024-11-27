@@ -19,6 +19,8 @@ import {
 
 import { NonNullablePoetType } from '@/features/poet/api/get-poets';
 import { usePoetsTableAction } from '../store/table-action';
+import { useNavigate } from 'react-router-dom';
+import { paths } from '@/config/paths';
 
 export const poetColumn: Array<ColumnDef<NonNullablePoetType>> = [
   {
@@ -48,6 +50,20 @@ export const poetColumn: Array<ColumnDef<NonNullablePoetType>> = [
     enableHiding: false,
     meta: {
       title: 'انتخاب',
+    },
+  },
+  {
+    id: 'id',
+    accessorKey: 'id',
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="آیدی شاعر" />
+    ),
+    cell: ({ row }) => <div>{row.getValue('id')}</div>,
+    enableSorting: true,
+    enableHiding: false,
+    maxSize: 48,
+    meta: {
+      title: 'آیدی شاعر',
     },
   },
   {
@@ -112,32 +128,10 @@ export const poetColumn: Array<ColumnDef<NonNullablePoetType>> = [
     enableHiding: false,
   },
   {
-    id: 'year',
-    accessorKey: 'birthYear',
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="تاریخ فلان" />
-    ),
-    cell: ({ row }) => (
-      <div>
-        {' '}
-        {new DateObject({
-          locale: persian_fa,
-          calendar: persian,
-          date: new Date(row.getValue('birthYear')),
-        }).format('YYYY/MM/DD')}
-      </div>
-    ),
-    enableSorting: true,
-    enableHiding: true,
-    meta: {
-      title: 'تاریخ فلان',
-    },
-  },
-
-  {
     id: 'actions',
     cell: function Cell({ row }) {
       const updateAction = usePoetsTableAction(state => state.updateAction);
+      const navigate = useNavigate();
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -151,7 +145,11 @@ export const poetColumn: Array<ColumnDef<NonNullablePoetType>> = [
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end" className="w-40">
             <DropdownMenuItem
-              onClick={() => updateAction({ row, type: 'update' })}
+              onClick={() =>
+                navigate(
+                  paths.writer_panel.update_poet.getHref(row.getValue('id')),
+                )
+              }
             >
               ویرایش
             </DropdownMenuItem>

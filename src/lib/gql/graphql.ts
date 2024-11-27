@@ -199,7 +199,7 @@ export type QueryPoemArgs = {
 };
 
 export type QueryPoetArgs = {
-  id: InputMaybe<Scalars['Int']['input']>;
+  id: Scalars['ID']['input'];
 };
 
 export type QueryPoetsArgs = {
@@ -249,6 +249,22 @@ export type DeletePoetMutationVariables = Exact<{
 export type DeletePoetMutation = {
   __typename?: 'Mutation';
   deletePoet: { __typename?: 'DeletePoet'; success: boolean | null } | null;
+};
+
+export type PoetQueryVariables = Exact<{
+  id: Scalars['ID']['input'];
+}>;
+
+export type PoetQuery = {
+  __typename?: 'Query';
+  poet: {
+    __typename?: 'PoetType';
+    id: string;
+    fullName: string;
+    birthYear: string | null;
+    deathYear: string | null;
+    biography: string;
+  } | null;
 };
 
 export type PoetsQueryVariables = Exact<{
@@ -318,6 +334,17 @@ export const DeletePoetDocument = new TypedDocumentString(`
   DeletePoetMutation,
   DeletePoetMutationVariables
 >;
+export const PoetDocument = new TypedDocumentString(`
+    query Poet($id: ID!) {
+  poet(id: $id) {
+    id
+    fullName
+    birthYear
+    deathYear
+    biography
+  }
+}
+    `) as unknown as TypedDocumentString<PoetQuery, PoetQueryVariables>;
 export const PoetsDocument = new TypedDocumentString(`
     query Poets($page: Int, $perPage: Int, $q: String, $sort: String) {
   poets(page: $page, perPage: $perPage, q: $q, sort: $sort) {

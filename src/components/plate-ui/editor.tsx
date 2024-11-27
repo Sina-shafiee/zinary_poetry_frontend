@@ -59,7 +59,7 @@ const editorVariants = cva(
     'rounded-md ring-offset-background placeholder:text-muted-foreground/80 focus-visible:outline-none',
     '[&_[data-slate-placeholder]]:text-muted-foreground/80 [&_[data-slate-placeholder]]:!opacity-100',
     '[&_[data-slate-placeholder]]:top-[auto_!important]',
-    '[&_strong]:font-bold',
+    '[&_strong]:font-bold border border-t-transparent rounded-t-none',
   ),
   {
     defaultVariants: {
@@ -79,8 +79,9 @@ const editorVariants = cva(
         default:
           'size-full px-16 pb-72 pt-4 text-base sm:px-[max(64px,calc(50%-350px))]',
         demo: 'size-full px-16 pb-72 pt-4 text-base sm:px-[max(64px,calc(50%-350px))]',
-        fullWidth: 'size-full px-16 pb-72 pt-4 text-base sm:px-24',
+        fullWidth: 'size-full px-4 pb-48 pt-4 text-base sm:px-14',
         none: '',
+        inSheet: 'size-full px-6 py-4 pb-72 text-base',
       },
     },
   },

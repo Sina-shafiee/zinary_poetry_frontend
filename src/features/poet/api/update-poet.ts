@@ -8,6 +8,8 @@ import { MutationConfig } from '@/lib/react-query';
 import { usePoetTableSearchParams } from '../hooks/use-poet-table-search-params';
 
 import { getPoetsQueryOptions } from './get-poets';
+import { getPoetQueryOptions } from './get-poet';
+import { useParams } from 'react-router-dom';
 
 export const updatePoetMutation = graphql(`
   mutation updatePoet(
@@ -64,6 +66,7 @@ type UseUpdatePoetOptions = {
 export const useUpdatePoet = (options: UseUpdatePoetOptions) => {
   const queryClient = useQueryClient();
   const params = usePoetTableSearchParams();
+  const { poetId } = useParams();
 
   const { onSuccess, ...config } = options.mutationConfig || {};
   return useMutation({
@@ -73,6 +76,11 @@ export const useUpdatePoet = (options: UseUpdatePoetOptions) => {
       queryClient.invalidateQueries({
         queryKey: getPoetsQueryOptions({
           ...params,
+        }).queryKey,
+      });
+      queryClient.invalidateQueries({
+        queryKey: getPoetQueryOptions({
+          id: poetId!,
         }).queryKey,
       });
     },
