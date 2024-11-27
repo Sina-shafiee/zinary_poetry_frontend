@@ -14,13 +14,13 @@ const DatePicker = React.forwardRef<
       calendar={persian}
       locale={persian_fa}
       arrowClassName="after:!shadow-sm"
-      containerClassName="w-full h-10 bg-transparent [&_rmdp-wrapper]:!shadow-none !shadow-sm rounded-md mt-1 flex h-9 w-full rounded-md border border-input"
+      containerClassName="w-full h-9 bg-transparent [&_rmdp-wrapper]:!shadow-none  rounded-md mt-1 flex h-9 w-full rounded-md border border-input"
       inputClass="rounded-md px-2 px-3 py-1 text-base !shadow-none transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium bg-transparent file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
       className="mt-1 rounded-md w-full"
       calendarPosition="bottom-right"
       style={{
-        height: '40px',
-        minHeight: '40px',
+        height: '2.1rem',
+        minHeight: '2.1rem',
         width: '100%',
       }}
       arrowStyle={{
