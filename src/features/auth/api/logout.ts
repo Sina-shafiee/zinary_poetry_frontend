@@ -19,9 +19,9 @@ export const useLogout = (options: UseLogoutOptions) => {
     mutationKey: ['authentication-user'],
     mutationFn: logout,
     onSuccess(...args) {
+      onSuccess?.(...args);
       queryClient.setQueryData(['authentication-user'], null);
       queryClient.invalidateQueries({ queryKey: ['authentication-user'] });
-      onSuccess?.(...args);
     },
     ...config,
   });

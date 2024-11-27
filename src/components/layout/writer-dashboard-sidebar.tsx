@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {
   Settings,
   LayoutDashboard,
@@ -106,7 +106,14 @@ const links = [
 ];
 const WriterDashboardSidebar = () => {
   const user = useUser({});
-  const logout = useLogout({});
+  const navigate = useNavigate();
+  const logout = useLogout({
+    mutationConfig: {
+      onSuccess() {
+        navigate(paths.home.getHref());
+      },
+    },
+  });
 
   return (
     <Sidebar
@@ -124,7 +131,7 @@ const WriterDashboardSidebar = () => {
               alt="logo"
             />
           </div>
-          <h2 className="px-2 font-semibold">پنل نویسندگان</h2>
+          <h2 className="px-2 text-lg font-semibold">پنل نویسندگان</h2>
         </div>
       </SidebarHeader>
       <Separator className="mt-2 mx-2 w-[calc(100%-1rem)]" />
